@@ -330,7 +330,35 @@ router.post("/blogs", isAuthenticated, isAdmin, upload.single("image"), async (r
     res.status(500).json({ success: false, message: "Error creating blog", error: error.message });
   }
 });
+router.put("/blogs/:id", isAuthenticated, isAdmin, upload.single("image"), async (req, res) => {
+  try {
+    const { title, excerpt, content, author, date, readTime, category } = req.body;
+    const blogId = req.params.id;
 
+    const blog = await Blog.findById(blogId);
+    if (!blog) return res.status(404).json({ success: false, message: "Blog not found" });
+
+    // Update fields if provided
+    if (title) blog.title = title;
+    if (excerpt) blog.excerpt = excerpt;
+    if (content) blog.content = content;
+    if (author) blog.author = author;
+    if (date) blog.date = date;
+    if (readTime) blog.readTime = readTime;
+    if (category) blog.category = category;
+
+    // Update image only if a new one is uploaded
+    if (req.file) {
+      blog.image = `/public/uploads/${req.file.filename}`;
+    }
+
+    await blog.save();
+    res.json({ success: true, message: "Blog updated successfully!", data: blog });
+  } catch (error) {
+    console.error("Update Blog Error:", error);
+    res.status(500).json({ success: false, message: "Error updating blog", error: error.message });
+  }
+});
 router.delete("/blogs/:id", isAuthenticated, isAdmin, async (req, res) => {
   try {
     await Blog.findByIdAndDelete(req.params.id);

@@ -7,6 +7,9 @@ import { getImageUrl } from "../services/api";
 export default function BlogCard({ blog }) {
   return (
     <article className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+      <Link to={`/blog/${blog._id}`}>
+      
+      
       <div className="relative">
         {/* 🚀 FIX: Use getImageUrl to resolve the full backend path */}
         <img 
@@ -42,14 +45,15 @@ export default function BlogCard({ blog }) {
 
         <p className="text-gray-600 mb-4 line-clamp-3">{blog.excerpt}</p>
 
-        <Link
-          to={`/blog/${blog._id}`}
+        <div
+          
           className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
         >
           Read More
           <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-        </Link>
+        </div>
       </div>
+      </Link>
     </article>
   )
 }

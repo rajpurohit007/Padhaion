@@ -92,6 +92,7 @@ export const adminAPI = {
 
   getBlogs: () => api.get("/admin/blogs"),
   createBlog: (data) => api.post("/admin/blogs", data),
+  updateBlog: (id, data) => api.put(`/admin/blogs/${id}`, data),
   deleteBlog: (id) => api.delete(`/admin/blogs/${id}`),
 };
 

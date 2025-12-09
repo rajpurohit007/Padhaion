@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Users, Building2, Calendar, Star, CheckCircle, XCircle, Clock, Send, Search, Bell ,FileText,Upload,Trash2} from "lucide-react";
+import { Users, Building2, Calendar, Star, CheckCircle, XCircle, Clock, Send, Search, Bell ,FileText,Upload,Trash2,Pencil} from "lucide-react";
 // import { adminAPI } from "../services/api";
 import { adminAPI, getImageUrl } from "../services/api";
 
@@ -34,7 +34,7 @@ export default function AdminDashboard({ user }) {
   // --- NEW: Notification Modal State ---
   const [showNotifModal, setShowNotifModal] = useState(false);
   const [notifData, setNotifData] = useState({ target: "all", title: "", message: "" });
-
+const [editingBlogId, setEditingBlogId] = useState(null);
   const [showBlogModal, setShowBlogModal] = useState(false);
   const [blogForm, setBlogForm] = useState({
     title: "", excerpt: "", content: "", author: "Admin", date: new Date().toISOString().split('T')[0], readTime: "5 min read", category: "Study Tips"
@@ -249,13 +249,65 @@ const handleCreateBlog = async (e) => {
       }
   };
 
+const handleEditBlog = (blog) => {
+      setEditingBlogId(blog._id);
+      setBlogForm({
+          title: blog.title,
+          excerpt: blog.excerpt,
+          content: blog.content,
+          author: blog.author,
+          date: blog.date, 
+          readTime: blog.readTime,
+          category: blog.category
+      });
+      setBlogImage(null); // Keep null to keep existing image unless changed
+      setShowBlogModal(true);
+  };
+
+  const handleSaveBlog = async (e) => {
+      e.preventDefault();
+      
+      // Image is required only if creating a NEW blog
+      if (!editingBlogId && !blogImage) return alert("Please upload an image for new blogs.");
+      
+      try {
+          const formData = new FormData();
+          Object.keys(blogForm).forEach(key => formData.append(key, blogForm[key]));
+          
+          // Only append image if a new one is selected
+          if (blogImage) formData.append("image", blogImage);
+
+          if (editingBlogId) {
+              // 🚀 UPDATE MODE
+              await adminAPI.updateBlog(editingBlogId, formData);
+              alert("Blog updated successfully!");
+          } else {
+              // 🚀 CREATE MODE
+              await adminAPI.createBlog(formData);
+              alert("Blog published successfully!");
+          }
+
+          closeBlogModal();
+          loadDashboardData();
+      } catch (error) {
+          console.error("Blog Error:", error);
+          alert("Failed to save blog");
+      }
+  };
   const handleDeleteBlog = async (id) => {
-      if (!confirm("Are you sure you want to delete this blog?")) return;
+      if (!confirm("Delete this blog?")) return;
       try {
           await adminAPI.deleteBlog(id);
-          alert("Blog deleted");
+          alert("Deleted");
           loadDashboardData();
-      } catch (error) { console.error(error); alert("Failed to delete blog"); }
+      } catch (error) { console.error(error); alert("Failed to delete"); }
+  };
+
+  const closeBlogModal = () => {
+      setShowBlogModal(false);
+      setEditingBlogId(null);
+      setBlogForm({ title: "", excerpt: "", content: "", author: "Admin", date: new Date().toISOString().split('T')[0], readTime: "5 min read", category: "Study Tips" });
+      setBlogImage(null);
   };
   if (loading) {
     return (
@@ -718,7 +770,7 @@ const handleCreateBlog = async (e) => {
               <div className="space-y-6">
                   <div className="flex justify-between items-center">
                       <h2 className="text-xl font-bold">Manage Blogs</h2>
-                      <button onClick={() => setShowBlogModal(true)} className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                      <button onClick={() => { setEditingBlogId(null); setShowBlogModal(true); }} className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                           <FileText className="w-4 h-4 mr-2" /> Write New Blog
                       </button>
                   </div>
@@ -727,24 +779,26 @@ const handleCreateBlog = async (e) => {
                       <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
                           <FileText className="h-12 w-12 text-gray-300 mx-auto mb-3" />
                           <h3 className="text-lg font-medium text-gray-900">No blogs published yet</h3>
-                          <p className="text-gray-500 mt-1">Get started by creating your first blog post.</p>
                       </div>
                   ) : (
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                           {blogs.map(blog => (
                               <div key={blog._id} className="bg-white rounded-lg shadow overflow-hidden border">
-                                  <img 
-                                    src={getImageUrl(blog.image)} 
-                                    alt={blog.title} 
-                                    className="w-full h-40 object-cover" 
-                                    onError={(e) => {e.target.src = "/placeholder.svg"}}
-                                  />
+                                  <img src={getImageUrl(blog.image)} alt={blog.title} className="w-full h-40 object-cover" onError={(e) => {e.target.src = "/placeholder.svg"}} />
                                   <div className="p-4">
                                       <h3 className="font-bold text-lg mb-2 line-clamp-1">{blog.title}</h3>
                                       <p className="text-gray-600 text-sm mb-4 line-clamp-2">{blog.excerpt}</p>
                                       <div className="flex justify-between items-center">
                                           <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">{blog.category}</span>
-                                          <button onClick={() => handleDeleteBlog(blog._id)} className="text-red-600 hover:text-red-800"><Trash2 className="w-5 h-5" /></button>
+                                          <div className="flex gap-2">
+                                              {/* 🚀 EDIT BUTTON */}
+                                              <button onClick={() => handleEditBlog(blog)} className="text-blue-600 hover:text-blue-800">
+                                                  <Pencil className="w-5 h-5" />
+                                              </button>
+                                              <button onClick={() => handleDeleteBlog(blog._id)} className="text-red-600 hover:text-red-800">
+                                                  <Trash2 className="w-5 h-5" />
+                                              </button>
+                                          </div>
                                       </div>
                                   </div>
                               </div>
@@ -901,55 +955,29 @@ const handleCreateBlog = async (e) => {
         </div>
       )}
       {showBlogModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
               <div className="bg-white rounded-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
-                  <h2 className="text-2xl font-bold mb-4">Write New Blog</h2>
-                  <form onSubmit={handleCreateBlog}>
+                  <h2 className="text-2xl font-bold mb-4">{editingBlogId ? "Edit Blog" : "Write New Blog"}</h2>
+                  <form onSubmit={handleSaveBlog}>
                       <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div className="col-span-2"><label className="block text-sm font-medium">Title</label><input className="w-full border p-2 rounded" value={blogForm.title} onChange={(e) => setBlogForm({...blogForm, title: e.target.value})} required /></div>
+                          <div><label className="block text-sm font-medium">Author</label><input className="w-full border p-2 rounded" value={blogForm.author} onChange={(e) => setBlogForm({...blogForm, author: e.target.value})} required /></div>
+                          <div><label className="block text-sm font-medium">Read Time</label><input className="w-full border p-2 rounded" value={blogForm.readTime} onChange={(e) => setBlogForm({...blogForm, readTime: e.target.value})} required /></div>
+                          <div><label className="block text-sm font-medium">Category</label><select className="w-full border p-2 rounded" value={blogForm.category} onChange={(e) => setBlogForm({...blogForm, category: e.target.value})}>{["Study Tips", "Career Advice", "University Guide", "Academic Tips", "Study Abroad"].map(c => <option key={c} value={c}>{c}</option>)}</select></div>
+                          <div><label className="block text-sm font-medium">Date</label><input type="date" className="w-full border p-2 rounded" value={blogForm.date} onChange={(e) => setBlogForm({...blogForm, date: e.target.value})} required /></div>
                           <div className="col-span-2">
-                              <label className="block text-sm font-medium mb-1">Blog Title</label>
-                              <input type="text" className="w-full border p-2 rounded" value={blogForm.title} onChange={(e) => setBlogForm({...blogForm, title: e.target.value})} required />
-                          </div>
-                          <div>
-                              <label className="block text-sm font-medium mb-1">Author</label>
-                              <input type="text" className="w-full border p-2 rounded" value={blogForm.author} onChange={(e) => setBlogForm({...blogForm, author: e.target.value})} required />
-                          </div>
-                          <div>
-                              <label className="block text-sm font-medium mb-1">Read Time</label>
-                              <input type="text" className="w-full border p-2 rounded" value={blogForm.readTime} onChange={(e) => setBlogForm({...blogForm, readTime: e.target.value})} placeholder="e.g. 5 min read" required />
-                          </div>
-                          <div>
-                              <label className="block text-sm font-medium mb-1">Category</label>
-                              <select className="w-full border p-2 rounded" value={blogForm.category} onChange={(e) => setBlogForm({...blogForm, category: e.target.value})}>
-                                  {["Study Tips", "Career Advice", "University Guide", "Academic Tips", "Study Abroad"].map(cat => <option key={cat} value={cat}>{cat}</option>)}
-                              </select>
-                          </div>
-                          <div>
-                              <label className="block text-sm font-medium mb-1">Date</label>
-                              <input type="date" className="w-full border p-2 rounded" value={blogForm.date} onChange={(e) => setBlogForm({...blogForm, date: e.target.value})} required />
-                          </div>
-                          <div className="col-span-2">
-                              <label className="block text-sm font-medium mb-1">Cover Image</label>
+                              <label className="block text-sm font-medium">Cover Image {editingBlogId && "(Optional)"}</label>
                               <div className="flex items-center gap-4">
                                   {blogImage && <img src={URL.createObjectURL(blogImage)} alt="Preview" className="w-20 h-20 object-cover rounded" />}
-                                  <label className="cursor-pointer bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded flex items-center gap-2">
-                                      <Upload className="w-4 h-4" /> Choose File
-                                      <input type="file" accept="image/*" className="hidden" onChange={(e) => setBlogImage(e.target.files[0])} />
-                                  </label>
+                                  <label className="cursor-pointer bg-gray-100 px-4 py-2 rounded flex items-center gap-2"><Upload className="w-4 h-4" /> {editingBlogId ? "Change File" : "Choose File"}<input type="file" accept="image/*" className="hidden" onChange={(e) => setBlogImage(e.target.files[0])} /></label>
                               </div>
                           </div>
-                          <div className="col-span-2">
-                              <label className="block text-sm font-medium mb-1">Short Excerpt</label>
-                              <textarea className="w-full border p-2 rounded" rows={2} value={blogForm.excerpt} onChange={(e) => setBlogForm({...blogForm, excerpt: e.target.value})} required></textarea>
-                          </div>
-                          <div className="col-span-2">
-                              <label className="block text-sm font-medium mb-1">Full Content</label>
-                              <textarea className="w-full border p-2 rounded" rows={6} value={blogForm.content} onChange={(e) => setBlogForm({...blogForm, content: e.target.value})} required></textarea>
-                          </div>
+                          <div className="col-span-2"><label className="block text-sm font-medium">Excerpt</label><textarea className="w-full border p-2 rounded" rows={2} value={blogForm.excerpt} onChange={(e) => setBlogForm({...blogForm, excerpt: e.target.value})} required></textarea></div>
+                          <div className="col-span-2"><label className="block text-sm font-medium">Content</label><textarea className="w-full border p-2 rounded" rows={6} value={blogForm.content} onChange={(e) => setBlogForm({...blogForm, content: e.target.value})} required></textarea></div>
                       </div>
                       <div className="flex gap-3">
-                          <button type="submit" className="flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-700">Publish Blog</button>
-                          <button type="button" onClick={() => setShowBlogModal(false)} className="flex-1 bg-gray-300 text-gray-700 py-2 rounded hover:bg-gray-400">Cancel</button>
+                          <button type="submit" className="flex-1 bg-green-600 text-white py-2 rounded">{editingBlogId ? "Update Blog" : "Publish Blog"}</button>
+                          <button type="button" onClick={closeBlogModal} className="flex-1 bg-gray-300 text-gray-700 py-2 rounded">Cancel</button>
                       </div>
                   </form>
               </div>
