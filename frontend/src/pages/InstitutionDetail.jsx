@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { Star, MapPin, Users, Phone, Mail, Calendar, CheckCircle, ArrowLeft, Image, MessageSquare, ThumbsUp, Reply } from "lucide-react"; 
+import { Star, MapPin, Users, Trash2, Calendar, CheckCircle, ArrowLeft, Image, MessageSquare, ThumbsUp, Reply } from "lucide-react"; 
 import { institutionsAPI, blogsAPI, getImageUrl } from "../services/api";
 import toast from "react-hot-toast"; 
 import ConfirmModal from "../components/ConfirmModal"; 
@@ -100,7 +100,7 @@ export default function InstitutionDetail({ user }) {
     if (isSubmitted) {
       const timer = setTimeout(() => {
         setIsSubmitted(false);
-      }, 3000);
+      }, 5000);
       return () => clearTimeout(timer);
     }
   }, [isSubmitted]);
@@ -109,6 +109,10 @@ export default function InstitutionDetail({ user }) {
   // --- HANDLERS: INQUIRY SYSTEM ---
 
   const handleOpenInquiryForm = () => {
+    if (user && user.userType !== 'student') {
+          toast.error("Only students can send inquiries.");
+          return;
+      }
       if (!user) {
           setConfirmOpen(true);
           return;
@@ -118,7 +122,10 @@ export default function InstitutionDetail({ user }) {
 
   const handleInquirySubmit = async (e) => {
     e.preventDefault();
-    
+    if (user && user.userType !== 'student') {
+        toast.error("Institutions/Admins cannot send inquiries.");
+        return;
+    }
     if (!user) {
         toast.error("You must be logged in to send an inquiry.");
         navigate("/login");
@@ -133,7 +140,7 @@ export default function InstitutionDetail({ user }) {
     try {
       // 1. Save to Database
       let payload = {
-        userId: user.id,
+        userId: user.id || user._id,
         name: inquiryData.name,
         email: inquiryData.email,
         phone: inquiryData.phone,
@@ -184,7 +191,7 @@ export default function InstitutionDetail({ user }) {
       try {
           // 1. Submit Review to API
           await institutionsAPI.addReview(id, {
-              userId: user.id,
+              userId: user.id || user._id,
               rating: reviewRating,
               comment: reviewComment,
               course: "General" 
@@ -217,7 +224,19 @@ export default function InstitutionDetail({ user }) {
     }));
   };
 
+// 🚀 HANDLER: DELETE REVIEW
+  const handleDeleteReview = async (reviewId) => {
+      if (!confirm("Are you sure you want to delete your review?")) return;
 
+      try {
+          await institutionsAPI.deleteReview(reviewId);
+          toast.success("Review deleted successfully");
+          setReviews(prevReviews => prevReviews.filter(r => r._id !== reviewId));
+      } catch (error) {
+          console.error("Delete failed:", error);
+          toast.error("Failed to delete review");
+      }
+  };
   // --- RENDER HELPERS ---
 
   if (loading) {
@@ -245,6 +264,10 @@ export default function InstitutionDetail({ user }) {
   const allImages = [institution.thumbnailUrl, ...(institution.galleryUrls || [])]
     .filter((url, index, self) => url && self.indexOf(url) === index)
     .map(url => getSafeImageUrl(url));
+
+    const averageRating = reviews.length > 0 
+      ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1)
+      : (institution.rating || 0);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -278,7 +301,7 @@ export default function InstitutionDetail({ user }) {
               <div className="flex flex-wrap items-center gap-4 text-blue-100 mb-6">
                 <div className="flex items-center space-x-1">
                   <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <span>{institution.rating} ({institution.totalReviews || reviews.length} Reviews)</span>
+                  <span>{averageRating} ({reviews.length} Reviews)</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <MapPin className="h-5 w-5" />
@@ -466,6 +489,15 @@ export default function InstitutionDetail({ user }) {
                             <div className="flex items-center justify-between mb-1">
                                 <span className="font-semibold text-gray-900">{review.userId?.name || "Anonymous"}</span>
                                 <span className="text-xs text-gray-500">{new Date(review.createdAt).toLocaleDateString()}</span>
+                                {user && (user.id === review.userId?._id || user._id === review.userId?._id) && (
+                                        <button 
+                                            onClick={() => handleDeleteReview(review._id)} 
+                                            className="text-red-500 hover:text-red-700 transition-colors"
+                                            title="Delete your review"
+                                        >
+                                            <Trash2 className="w-4 h-4" />
+                                        </button>
+                                    )}
                             </div>
                             <div className="flex mb-2">
                                 {[...Array(5)].map((_, i) => (
@@ -510,7 +542,7 @@ export default function InstitutionDetail({ user }) {
               <div className="text-center mb-6">
                 <div className="flex items-center justify-center space-x-2 mb-4">
                   <Star className="h-6 w-6 text-yellow-400 fill-current" />
-                  <span className="text-2xl font-bold text-gray-900">{institution.rating}</span>
+                  <span className="text-2xl font-bold text-gray-900">{averageRating}</span>
                   <span className="text-gray-600">/ 5.0</span>
                 </div>
                 <p className="text-gray-600">Based on student reviews</p>

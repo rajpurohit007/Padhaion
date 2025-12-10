@@ -2,8 +2,9 @@
 
 import { Link } from "react-router-dom"
 import { Star, MapPin, Users, Phone, Mail, Award } from "lucide-react"
-import React from "react"
-import { getImageUrl } from "../services/api"
+
+import React, { useState, useEffect } from "react";
+import { getImageUrl, institutionsAPI } from "../services/api";
 
 export default function InstitutionCard({ institution }) {
     if (!institution) return null 
@@ -12,6 +13,31 @@ export default function InstitutionCard({ institution }) {
     // Use thumbnailUrl first, fallback to generic placeholder
     const cardImage = getImageUrl(institution.thumbnailUrl);
 
+    // 🚀 STATE: Hold live reviews
+  const [reviews, setReviews] = useState([]);
+
+  // 🚀 EFFECT: Fetch latest reviews for this card specifically
+  useEffect(() => {
+    const fetchCardReviews = async () => {
+      try {
+        const response = await institutionsAPI.getReviews(institution._id);
+        setReviews(response.data.data || []);
+      } catch (error) {
+        console.error("Error fetching reviews for card:", error);
+      }
+    };
+
+    if (institution._id) {
+      fetchCardReviews();
+    }
+  }, [institution._id]);
+
+  // 🚀 CALCULATION LOGIC (Matched exactly with Dashboard/Detail)
+  const averageRating = reviews.length > 0 
+      ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1)
+      : (institution.rating || "0");
+
+  const reviewCount = reviews.length; // Use live count, not prop count
     return (
       <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
         <div className="relative">
@@ -30,8 +56,11 @@ export default function InstitutionCard({ institution }) {
             <div className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center space-x-1">
               <Star className="h-4 w-4 text-yellow-400 fill-current" />
               <span className="text-sm font-bold text-gray-900">
-                {institution.rating ?? "0"}
-              </span>
+              {averageRating}
+            </span>
+            <span className="text-xs text-gray-500 font-medium ml-0.5">
+              ({reviewCount})
+            </span>
             </div>
           </div>
         </div>
@@ -53,7 +82,7 @@ export default function InstitutionCard({ institution }) {
 
           <div className="flex items-center space-x-1 text-gray-600 mb-3">
             <MapPin className="h-4 w-4" />
-            <span className="text-sm">{institution.location || "Location N/A"}</span>
+            <span className="text-sm">{institution.city || "Location N/A"}</span>
           </div>
 
           <p className="text-gray-600 text-sm mb-4">

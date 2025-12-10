@@ -33,6 +33,7 @@ export const institutionsAPI = {
   // Public Reviews
   getReviews: (id) => api.get(`/institutions/${id}/reviews`),
   addReview: (id, data) => api.post(`/institutions/${id}/reviews`, data),
+  deleteReview: (reviewId) => api.delete(`/reviews/${reviewId}`),
 };
 
 export const blogsAPI = {
@@ -107,6 +108,7 @@ export const institutionAPI = {
   
   // --- ADDED: Missing methods for Dashboard Review/Inquiry/Password Logic ---
   getReviews: () => api.get("/institution/reviews"),
+  deleteReview: (reviewId) => api.delete(`/reviews/${reviewId}`),
   getInquiries: () => api.get("/institution/inquiries"),
   replyToReview: (id, reply) => api.post(`/institution/reviews/${id}/reply`, { reply }),
   likeReview: (id) => api.patch(`/institution/reviews/${id}/like`),

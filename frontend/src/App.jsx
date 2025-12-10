@@ -22,6 +22,7 @@ import BlogPost from "./pages/BlogPost"
 import AdminDashboard from "./pages/AdminDashboard"
 import InstitutionDashboard from "./pages/InstitutionDashboard"
 import StudentDashboard from "./pages/StudentDashboard"
+import AboutUs from './pages/AboutUs';
 
 function App() {
   const [user, setUser] = useState(null)
@@ -72,7 +73,7 @@ function App() {
             <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/book-consultation" element={<BookConsultation user={user} />} />
             <Route path="/contact" element={<Contact />} />
-            
+            <Route path="/about" element={<AboutUs />} />
             {/* 🚀 START: LOGIN REDIRECTION LOGIC 🚀 */}
             <Route
                 path="/login"

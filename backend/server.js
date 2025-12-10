@@ -49,7 +49,7 @@ const adminRoutes = require("./routes/admin");
 const institutionDashboardRoutes = require("./routes/institutionRoutes");
 const studentRoutes = require("./routes/studentRoutes");
 const uploadRoutes = require("./routes/upload");
-
+const reviewRoutes = require("./routes/reviews");
 // Use Routes
 app.use("/api/institutions", institutionRoutes);
 app.use("/api/blogs", blogRoutes);
@@ -63,6 +63,7 @@ app.use("/api/institution", institutionDashboardRoutes);
 app.use("/api/student", studentRoutes);
 app.use("/api/upload", uploadRoutes);
 
+app.use("/api/reviews", reviewRoutes);
 // Health Check Route
 app.get("/api/health", (req, res) => {
     res.json({ status: "OK", message: "Server is running" });

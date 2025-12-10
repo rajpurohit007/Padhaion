@@ -38,6 +38,7 @@ export default function Navbar({ user, setUser }) {
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/institutions", label: "Institutions" },
+    { path: "/about", label: "About" },
     { path: "/blog", label: "Blog" },
     { path: "/contact", label: "Contact" },
   ];

@@ -344,7 +344,9 @@ export default function InstitutionDashboard({ user }) {
       </div>
     );
   }
-
+const averageRating = reviews.length > 0 
+      ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1)
+      : (institutionData?.rating || 0);
   return (
     <div className="min-h-screen bg-gray-50 py-8 relative">
 
@@ -397,7 +399,11 @@ export default function InstitutionDashboard({ user }) {
             <Mail className="h-10 w-10 text-blue-500" />
           </div>
           <div className="bg-white rounded-lg shadow p-6 flex justify-between items-center">
-            <div><p className="text-gray-600 text-sm">Rating</p><p className="text-2xl font-bold">{institutionData?.rating}/5</p></div>
+            <div><p className="text-gray-600 text-sm">Rating</p>
+           <div className="flex flex-col">
+                    <p className="text-2xl font-bold">{averageRating}/5</p>
+                    <span className="text-xs text-gray-500">({reviews.length} Reviews)</span>
+                </div></div>
             <Star className="h-10 w-10 text-yellow-600" />
           </div>
           {/* NEW: Notification Stat */}
@@ -674,7 +680,7 @@ export default function InstitutionDashboard({ user }) {
                 </div>
                 {notifications.length === 0 ? (
                   <div className="text-center py-8">
-                    <Bell className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+                    <Bell className="h-16 w-16 text-gray-300 mx-mb-4" />
                     <p className="text-gray-600">No notifications yet</p>
                   </div>
                 ) : (
