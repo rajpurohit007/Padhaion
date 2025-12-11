@@ -2,7 +2,7 @@
 import React from "react";
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { GraduationCap, Menu, X, User, LogOut } from "lucide-react"
+import { BookOpen, Menu, X, User, LogOut } from "lucide-react"
 import logo from '../assets/padhai-on_logo.jpg';
 
 export default function Navbar({ user, setUser }) {
@@ -38,6 +38,7 @@ export default function Navbar({ user, setUser }) {
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/institutions", label: "Institutions" },
+    { path: "/career-library", label: "Career Library" },
     { path: "/about", label: "About" },
     { path: "/blog", label: "Blog" },
     { path: "/contact", label: "Contact" },

@@ -45,6 +45,11 @@ export default function Footer() {
                   Institutions
                 </Link>
               </li>
+              <li>
+                <Link to="/career-library" className="text-gray-300 hover:text-white transition-colors">
+                  Career Library
+                </Link>
+              </li>
               <ul>
                 <li>
                   <Link to="/about" className="text-gray-300 hover:text-white transition-colors">

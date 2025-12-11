@@ -66,6 +66,12 @@ export const coursesAPI = {
   create: (data) => api.post("/courses", data),
 };
 
+export const careersAPI = {
+  getAll: (params) => api.get("/careers", { params }),
+  create: (data) => api.post("/careers", data), // Admin use
+  seed: () => api.post("/careers/seed"), // One-time setup
+};
+
 export const usersAPI = {
   register: (data) => api.post("/users/register", data),
   login: (data) => api.post("/users/login", data),

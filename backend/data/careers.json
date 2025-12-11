@@ -1,0 +1,452 @@
+[
+  {
+    "title": "Software Engineer",
+    "category": "Science & Tech",
+    "description": "Design, develop, and test software applications and systems.",
+    "salaryRange": "4 - 15 LPA",
+    "educationPath": "Class 12 (Science) > B.Tech (CS/IT) > Internship",
+    "futureOutlook": "Rapid Growth",
+    "image": "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&q=80"
+  },
+  {
+    "title": "Data Scientist",
+    "category": "Science & Tech",
+    "description": "Analyze complex data to help companies make smarter decisions.",
+    "salaryRange": "6 - 20 LPA",
+    "educationPath": "B.Tech / B.Sc Stats > M.Sc Data Science",
+    "futureOutlook": "Very High Growth",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "Full Stack Developer",
+    "category": "Science & Tech",
+    "description": "Handle both front-end and back-end development of web applications.",
+    "salaryRange": "5 - 18 LPA",
+    "educationPath": "B.Tech (CS) / BCA > MCA > Bootcamp",
+    "futureOutlook": "High Demand",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80"
+  },
+  {
+    "title": "Cybersecurity Analyst",
+    "category": "Science & Tech",
+    "description": "Protect an organization's computer networks and systems.",
+    "salaryRange": "6 - 16 LPA",
+    "educationPath": "B.Tech > Cybersecurity Certification (CEH, CISSP)",
+    "futureOutlook": "Critical Growth",
+    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+  },
+  {
+    "title": "Cloud Architect",
+    "category": "Science & Tech",
+    "description": "Design and manage cloud computing strategies for companies.",
+    "salaryRange": "12 - 30 LPA",
+    "educationPath": "B.Tech > AWS/Azure Certification > Experience",
+    "futureOutlook": "Explosive Growth",
+    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
+  },
+  {
+    "title": "AI/ML Engineer",
+    "category": "Science & Tech",
+    "description": "Build artificial intelligence models and machine learning algorithms.",
+    "salaryRange": "8 - 25 LPA",
+    "educationPath": "B.Tech > M.Tech (AI) or Specialization",
+    "futureOutlook": "Future Tech",
+    "image": "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&q=80"
+  },
+  {
+    "title": "Blockchain Developer",
+    "category": "Science & Tech",
+    "description": "Develop decentralized applications and smart contracts.",
+    "salaryRange": "6 - 20 LPA",
+    "educationPath": "B.Tech (CS) > Blockchain Certification",
+    "futureOutlook": "Emerging",
+    "image": "https://images.unsplash.com/photo-1621504450168-b8c437536b3a?w=800&q=80"
+  },
+  {
+    "title": "DevOps Engineer",
+    "category": "Science & Tech",
+    "description": "Bridge the gap between development and operations teams.",
+    "salaryRange": "7 - 20 LPA",
+    "educationPath": "B.Tech > Experience in SysAdmin/Coding",
+    "futureOutlook": "Steady Growth",
+    "image": "https://images.unsplash.com/photo-1607799275518-d58665d096c1?w=800&q=80"
+  },
+  {
+    "title": "Chartered Accountant (CA)",
+    "category": "Commerce & Finance",
+    "description": "Manage financial accounts, taxation, and auditing for firms.",
+    "salaryRange": "7 - 25 LPA",
+    "educationPath": "Class 12 (Commerce) > CPT > IPCC > CA Final",
+    "futureOutlook": "Stable",
+    "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80"
+  },
+  {
+    "title": "Investment Banker",
+    "category": "Commerce & Finance",
+    "description": "Help companies raise capital and manage investments.",
+    "salaryRange": "12 - 50 LPA",
+    "educationPath": "B.Com/BBA > MBA (Finance) from Top B-School",
+    "futureOutlook": "High Reward",
+    "image": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=80"
+  },
+  {
+    "title": "Financial Analyst",
+    "category": "Commerce & Finance",
+    "description": "Guide businesses and individuals in investment decisions.",
+    "salaryRange": "4 - 12 LPA",
+    "educationPath": "B.Com > CFA Level 1, 2, 3",
+    "futureOutlook": "Growing",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+  },
+  {
+    "title": "Company Secretary (CS)",
+    "category": "Commerce & Finance",
+    "description": "Ensure companies comply with legal and statutory regulations.",
+    "salaryRange": "5 - 15 LPA",
+    "educationPath": "Class 12 > CSEET > CS Executive > CS Professional",
+    "futureOutlook": "Stable",
+    "image": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80"
+  },
+  {
+    "title": "Actuary",
+    "category": "Commerce & Finance",
+    "description": "Analyze financial risk using mathematics and statistics.",
+    "salaryRange": "10 - 30 LPA",
+    "educationPath": "B.Sc (Maths/Stats) > ACET Exams (15 papers)",
+    "futureOutlook": "Niche & High Paying",
+    "image": "https://images.unsplash.com/photo-1543286386-713df548e9cc?w=800&q=80"
+  },
+  {
+    "title": "Bank PO",
+    "category": "Commerce & Finance",
+    "description": "Entry-level management position in public sector banks.",
+    "salaryRange": "4 - 8 LPA",
+    "educationPath": "Any Graduate > IBPS/SBI PO Exam",
+    "futureOutlook": "Secure Govt Job",
+    "image": "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=800&q=80"
+  },
+  {
+    "title": "Doctor (MBBS)",
+    "category": "Medical",
+    "description": "Diagnose and treat patient illnesses and injuries.",
+    "salaryRange": "10 - 30 LPA",
+    "educationPath": "Class 12 (PCB) > NEET > MBBS > MD/MS",
+    "futureOutlook": "Evergreen",
+    "image": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&q=80"
+  },
+  {
+    "title": "Dentist (BDS)",
+    "category": "Medical",
+    "description": "Diagnose and treat problems with patients' teeth and gums.",
+    "salaryRange": "3 - 10 LPA",
+    "educationPath": "Class 12 (PCB) > NEET > BDS > MDS",
+    "futureOutlook": "Steady",
+    "image": "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=800&q=80"
+  },
+  {
+    "title": "Pharmacist",
+    "category": "Medical",
+    "description": "Dispense medications and advise patients on their use.",
+    "salaryRange": "3 - 8 LPA",
+    "educationPath": "Class 12 (PCB) > B.Pharm > M.Pharm",
+    "futureOutlook": "Growing",
+    "image": "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&q=80"
+  },
+  {
+    "title": "Nurse",
+    "category": "Medical",
+    "description": "Provide care to patients and assist doctors.",
+    "salaryRange": "3 - 8 LPA",
+    "educationPath": "Class 12 (PCB) > B.Sc Nursing",
+    "futureOutlook": "High Demand",
+    "image": "https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?w=800&q=80"
+  },
+  {
+    "title": "Ayurveda Doctor (BAMS)",
+    "category": "Medical",
+    "description": "Treat patients using traditional Indian medicine.",
+    "salaryRange": "4 - 12 LPA",
+    "educationPath": "Class 12 (PCB) > NEET > BAMS",
+    "futureOutlook": "Reviving",
+    "image": "https://images.unsplash.com/photo-1603569283847-aa295f0d016a?w=800&q=80"
+  },
+  {
+    "title": "Physiotherapist",
+    "category": "Medical",
+    "description": "Help patients recover movement and manage pain.",
+    "salaryRange": "3 - 9 LPA",
+    "educationPath": "Class 12 (PCB) > BPT > MPT",
+    "futureOutlook": "Growing",
+    "image": "https://images.unsplash.com/photo-1576091160550-2187d80aeff2?w=800&q=80"
+  },
+  {
+    "title": "Veterinarian",
+    "category": "Medical",
+    "description": "Diagnose and treat medical conditions in animals.",
+    "salaryRange": "5 - 12 LPA",
+    "educationPath": "Class 12 (PCB) > NEET > B.V.Sc & AH",
+    "futureOutlook": "Niche",
+    "image": "https://images.unsplash.com/photo-1628009368231-7603358486cf?w=800&q=80"
+  },
+  {
+    "title": "Corporate Lawyer",
+    "category": "Legal",
+    "description": "Advise businesses on their legal rights and obligations.",
+    "salaryRange": "6 - 18 LPA",
+    "educationPath": "Class 12 > CLAT > LLB > LLM",
+    "futureOutlook": "High Growth",
+    "image": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&q=80"
+  },
+  {
+    "title": "Litigation Lawyer",
+    "category": "Legal",
+    "description": "Represent clients in court for civil or criminal cases.",
+    "salaryRange": "3 - 20 LPA (Variable)",
+    "educationPath": "LLB > Bar Council Exam > Practice",
+    "futureOutlook": "Competitive",
+    "image": "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=800&q=80"
+  },
+  {
+    "title": "Judge",
+    "category": "Legal",
+    "description": "Preside over court proceedings and adjudicate cases.",
+    "salaryRange": "12 - 24 LPA (Govt Scale)",
+    "educationPath": "LLB > Judicial Services Exam (PCS-J)",
+    "futureOutlook": "Prestigious",
+    "image": "https://images.unsplash.com/photo-1589578527966-fdac0f44566c?w=800&q=80"
+  },
+  {
+    "title": "Digital Marketer",
+    "category": "Management",
+    "description": "Promote brands using social media, SEO, and email campaigns.",
+    "salaryRange": "3 - 10 LPA",
+    "educationPath": "Any Graduate > Certification / MBA Marketing",
+    "futureOutlook": "High Growth",
+    "image": "https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=800&q=80"
+  },
+  {
+    "title": "HR Manager",
+    "category": "Management",
+    "description": "Recruit, screen, and interview job applicants.",
+    "salaryRange": "5 - 15 LPA",
+    "educationPath": "BBA > MBA (HR)",
+    "futureOutlook": "Essential",
+    "image": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80"
+  },
+  {
+    "title": "Product Manager",
+    "category": "Management",
+    "description": "Oversee the development and success of a product.",
+    "salaryRange": "15 - 35 LPA",
+    "educationPath": "B.Tech + MBA",
+    "futureOutlook": "Very High Demand",
+    "image": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80"
+  },
+  {
+    "title": "Hotel Manager",
+    "category": "Management",
+    "description": "Manage operations of a hotel or lodging establishment.",
+    "salaryRange": "4 - 12 LPA",
+    "educationPath": "Class 12 > BHM (Hotel Management)",
+    "futureOutlook": "Post-Pandemic Boom",
+    "image": "https://images.unsplash.com/photo-1556745757-8d76bdb6984b?w=800&q=80"
+  },
+  {
+    "title": "Event Manager",
+    "category": "Management",
+    "description": "Plan and organize events like weddings and conferences.",
+    "salaryRange": "3 - 8 LPA",
+    "educationPath": "Any Graduate > Diploma in Event Mgmt",
+    "futureOutlook": "Creative & Dynamic",
+    "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80"
+  },
+  {
+    "title": "Graphic Designer",
+    "category": "Design & Arts",
+    "description": "Create visual concepts using software like Photoshop and Illustrator.",
+    "salaryRange": "3 - 8 LPA",
+    "educationPath": "Class 12 > B.Des / Certification",
+    "futureOutlook": "Growing",
+    "image": "https://images.unsplash.com/photo-1626785774573-4b799314346d?w=800&q=80"
+  },
+  {
+    "title": "Fashion Designer",
+    "category": "Design & Arts",
+    "description": "Design clothing and accessories.",
+    "salaryRange": "4 - 15 LPA",
+    "educationPath": "Class 12 > NIFT / NID Entrance > B.Des",
+    "futureOutlook": "Creative",
+    "image": "https://images.unsplash.com/photo-1537832816519-689ad163238b?w=800&q=80"
+  },
+  {
+    "title": "UX/UI Designer",
+    "category": "Design & Arts",
+    "description": "Design user-friendly interfaces for websites and apps.",
+    "salaryRange": "5 - 15 LPA",
+    "educationPath": "Any Graduate > Design Bootcamp / B.Des",
+    "futureOutlook": "High Demand",
+    "image": "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&q=80"
+  },
+  {
+    "title": "Interior Designer",
+    "category": "Design & Arts",
+    "description": "Make indoor spaces functional and beautiful.",
+    "salaryRange": "3 - 10 LPA",
+    "educationPath": "Class 12 > B.Des (Interior) / Diploma",
+    "futureOutlook": "Real Estate Boom",
+    "image": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80"
+  },
+  {
+    "title": "Animator",
+    "category": "Design & Arts",
+    "description": "Create moving images for movies, games, and ads.",
+    "salaryRange": "3 - 12 LPA",
+    "educationPath": "B.Sc Animation / Diploma in VFX",
+    "futureOutlook": "Growing Media Industry",
+    "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
+  },
+  {
+    "title": "Journalist",
+    "category": "Mass Communication",
+    "description": "Research, write, and report news stories.",
+    "salaryRange": "3 - 8 LPA",
+    "educationPath": "Class 12 > BJMC (Journalism)",
+    "futureOutlook": "Digital Shift",
+    "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80"
+  },
+  {
+    "title": "Public Relations (PR)",
+    "category": "Mass Communication",
+    "description": "Manage the public image of a company or individual.",
+    "salaryRange": "4 - 10 LPA",
+    "educationPath": "Any Graduate > MBA / PG Diploma in PR",
+    "futureOutlook": "Networking Heavy",
+    "image": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80"
+  },
+  {
+    "title": "Content Writer",
+    "category": "Mass Communication",
+    "description": "Write articles, blogs, and marketing copy.",
+    "salaryRange": "2.5 - 6 LPA",
+    "educationPath": "Any Graduate (English/Lit helps)",
+    "futureOutlook": "Freelance Friendly",
+    "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&q=80"
+  },
+  {
+    "title": "Civil Services (IAS)",
+    "category": "Humanities",
+    "description": "Serve the government in administrative and police roles.",
+    "salaryRange": "56k - 2.5L per month",
+    "educationPath": "Any Graduate > UPSC Exam",
+    "futureOutlook": "Prestigious",
+    "image": "https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=800&q=80"
+  },
+  {
+    "title": "Psychologist",
+    "category": "Humanities",
+    "description": "Study human behavior and help with mental health.",
+    "salaryRange": "4 - 12 LPA",
+    "educationPath": "BA Psychology > MA > M.Phil/PhD",
+    "futureOutlook": "Increasing Awareness",
+    "image": "https://images.unsplash.com/photo-1527689368864-3a821dbccc34?w=800&q=80"
+  },
+  {
+    "title": "Economist",
+    "category": "Humanities",
+    "description": "Research and analyze economic issues.",
+    "salaryRange": "6 - 20 LPA",
+    "educationPath": "BA Economics > MA Economics > PhD",
+    "futureOutlook": "Research/Policy",
+    "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80"
+  },
+  {
+    "title": "Social Worker",
+    "category": "Humanities",
+    "description": "Help people solve and cope with problems in their everyday lives.",
+    "salaryRange": "3 - 6 LPA",
+    "educationPath": "BSW > MSW (Master of Social Work)",
+    "futureOutlook": "NGO/CSR Roles",
+    "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80"
+  },
+  {
+    "title": "Professor / Lecturer",
+    "category": "Humanities",
+    "description": "Teach students at the college or university level.",
+    "salaryRange": "6 - 15 LPA",
+    "educationPath": "Master's > NET Exam > PhD",
+    "futureOutlook": "Academic",
+    "image": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80"
+  },
+  {
+    "title": "Merchant Navy Officer",
+    "category": "Other",
+    "description": "Operate and manage commercial ships.",
+    "salaryRange": "12 - 50 LPA",
+    "educationPath": "Class 12 (PCM) > IMU CET > B.Sc Nautical Science",
+    "futureOutlook": "Adventurous",
+    "image": "https://images.unsplash.com/photo-1533552989269-1c9f4c340d89?w=800&q=80"
+  },
+  {
+    "title": "Commercial Pilot",
+    "category": "Other",
+    "description": "Fly airplanes for airlines.",
+    "salaryRange": "15 - 50 LPA",
+    "educationPath": "Class 12 (PCM) > Flight School (CPL)",
+    "futureOutlook": "High Investment",
+    "image": "https://images.unsplash.com/photo-1524592714635-d77511a4834d?w=800&q=80"
+  },
+  {
+    "title": "Cabin Crew",
+    "category": "Other",
+    "description": "Ensure safety and comfort of passengers on flights.",
+    "salaryRange": "4 - 10 LPA",
+    "educationPath": "Class 12 > Diploma in Aviation",
+    "futureOutlook": "Customer Service",
+    "image": "https://images.unsplash.com/photo-1517400508447-f8dd518b86db?w=800&q=80"
+  },
+  {
+    "title": "Chef",
+    "category": "Other",
+    "description": "Prepare food and manage kitchen operations.",
+    "salaryRange": "3 - 15 LPA",
+    "educationPath": "Hotel Management > Culinary Arts",
+    "futureOutlook": "Creative",
+    "image": "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&q=80"
+  },
+  {
+    "title": "Fashion Stylist",
+    "category": "Design & Arts",
+    "description": "Coordinate outfits for photoshoots and celebrities.",
+    "salaryRange": "4 - 12 LPA",
+    "educationPath": "Diploma in Fashion Styling",
+    "futureOutlook": "Niche",
+    "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80"
+  },
+  {
+    "title": "Ethical Hacker",
+    "category": "Science & Tech",
+    "description": "Legally hack systems to find vulnerabilities.",
+    "salaryRange": "5 - 18 LPA",
+    "educationPath": "B.Tech > CEH Certification",
+    "futureOutlook": "High Demand",
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"
+  },
+  {
+    "title": "Robotics Engineer",
+    "category": "Science & Tech",
+    "description": "Design and build robots.",
+    "salaryRange": "6 - 20 LPA",
+    "educationPath": "B.Tech (Mechatronics/Robotics)",
+    "futureOutlook": "Future Tech",
+    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80"
+  },
+  {
+    "title": "Petroleum Engineer",
+    "category": "Science & Tech",
+    "description": "Design methods for extracting oil and gas.",
+    "salaryRange": "8 - 25 LPA",
+    "educationPath": "B.Tech Petroleum Engineering",
+    "futureOutlook": "High Paying",
+    "image": "https://images.unsplash.com/photo-1518709414768-a88986a45e5d?w=800&q=80"
+  }
+]

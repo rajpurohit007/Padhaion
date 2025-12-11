@@ -23,7 +23,7 @@ import AdminDashboard from "./pages/AdminDashboard"
 import InstitutionDashboard from "./pages/InstitutionDashboard"
 import StudentDashboard from "./pages/StudentDashboard"
 import AboutUs from './pages/AboutUs';
-
+import CareerLibrary from './pages/CareerLibrary';
 function App() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -75,6 +75,7 @@ function App() {
             <Route path="/book-consultation" element={<BookConsultation user={user} />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/career-library" element={<CareerLibrary />} />
             {/* 🚀 START: LOGIN REDIRECTION LOGIC 🚀 */}
             <Route
                 path="/login"
