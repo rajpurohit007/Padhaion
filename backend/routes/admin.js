@@ -45,45 +45,6 @@ const safeSendConsultationEmail = async (email, name, details) => {
 };
 
 // --- ROUTES ---
-// ---- ADMIN LOGIN ----
-router.post("/login", async (req, res) => {
-    const { email, password } = req.body;
-
-    try {
-        const admin = await User.findOne({ email });
-
-        if (!admin) {
-            return res.status(401).json({ success: false, message: "Invalid Email" });
-        }
-
-        if (admin.userType !== "admin") {
-            return res.status(403).json({ success: false, message: "Access Denied" });
-        }
-
-        const isMatch = await bcrypt.compare(password, admin.password);
-        if (!isMatch) {
-            return res.status(401).json({ success: false, message: "Invalid Password" });
-        }
-
-        const token = admin._id.toString(); // or JWT if you use generateToken()
-
-        res.json({
-            success: true,
-            message: "Admin login successful",
-            token,
-            user: {
-                id: admin._id,
-                name: admin.name,
-                email: admin.email,
-                userType: admin.userType
-            }
-        });
-
-    } catch (error) {
-        console.error("ADMIN LOGIN ERROR:", error);
-        res.status(500).json({ success: false, message: "Server error" });
-    }
-});
 
 router.get("/dashboard/stats", isAuthenticated, isAdmin, async (req, res) => {
     try {
