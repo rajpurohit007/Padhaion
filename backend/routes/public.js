@@ -5,7 +5,7 @@ const Blog = require("../models/Blog");
 const User = require("../models/User");
 const Career = require("../models/Career");
 
-// GET /api/public (This is the expected endpoint for home data)
+// GET /api/public/ (This is the route the homepage expects to hit)
 router.get("/", async (req, res) => {
     try {
         // Fetch top data points for the homepage display
@@ -21,6 +21,7 @@ router.get("/", async (req, res) => {
             totalCareers
         };
 
+        // 🚀 Success: Respond with the data
         res.json({ success: true, data: homeData });
 
     } catch (error) {
