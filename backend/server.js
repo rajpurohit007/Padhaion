@@ -76,7 +76,7 @@ mongoose
         require("./models/Course"); // Assuming you have a Course model
         require("./models/Contact"); // Assuming you have a Contact model
         require("./models/Testimonial"); // Assuming you have a Testimonial model
-        require("./models/Career"); // Assuming you have a Career model
+        // require("./models/Career"); // Assuming you have a Career model
         const User = require("./models/User"); 
         seedAdmin(User); // Pass the User model to seedAdmin
     })
