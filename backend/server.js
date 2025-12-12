@@ -71,7 +71,7 @@ mongoose
 
 // Import Routes
 const institutionRoutes = require("./routes/institutions");
-
+const userRoutes = require("./routes/users");
 const blogRoutes = require("./routes/blogs");
 const courseRoutes = require("./routes/courses");
 const userRoutes = require("./routes/users");
@@ -86,6 +86,7 @@ const reviewRoutes = require("./routes/reviews");
 
 // Use Routes
 app.use("/api/institutions", institutionRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/blogs", blogRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/users", userRoutes);

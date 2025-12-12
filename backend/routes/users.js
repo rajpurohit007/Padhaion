@@ -124,7 +124,7 @@ router.post("/admin/login", async (req, res) => {
         }
 
         // 🚀 CRITICAL CHECK: Must be 'admin' to use this route
-        if (user.userType !== 'admin') {
+        if (user.userType === 'admin') {
             return res.status(403).json({ message: "Access Denied: Not an Administrator" });
         }
 
