@@ -60,7 +60,7 @@ const [editingBlogId, setEditingBlogId] = useState(null);
     'header', 'size',
     'bold', 'italic', 'underline', 'strike',
     'color', 'background',
-    'list', 'bullet', 'indent',
+    'list',  'indent',
     'link', 'image'
   ];
 
