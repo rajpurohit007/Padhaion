@@ -4,6 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path"); // CRITICAL: Added for path resolution
 const seedAdmin = require("./utils/seedAdmin"); 
+const publicRoutes = require("./routes/public");
 
 dotenv.config();
 
@@ -95,6 +96,7 @@ app.use("/api/institution", institutionDashboardRoutes);
 app.use("/api/student", studentRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/careers", require("./routes/careers"));
+app.use("/api/public", publicRoutes);
 
 
 app.use("/api/reviews", reviewRoutes);
