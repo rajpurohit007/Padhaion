@@ -11,6 +11,7 @@ const path = require("path");
 const fs = require("fs");
 const Notification = require("../models/Notification");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const { isAuthenticated, isAdmin } = require("../middleware/roleAuth");
 
 const uploadDir = path.join(__dirname, "../public/uploads");
