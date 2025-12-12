@@ -143,7 +143,7 @@ export default function Login({ setUser, user }) {
                     localStorage.removeItem("padhaiOn_user");
                     localStorage.removeItem("padhaiOn_token");
                     setUser(null);
-                    toast.error("Administrator login is restricted. Please use the dedicated Admin Portal.");
+                    toast.error("login is restricted for the user.");
                     return; // STOP EXECUTION
                 }
 
