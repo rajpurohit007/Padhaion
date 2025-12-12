@@ -124,9 +124,9 @@ router.post("/admin/login", async (req, res) => {
         }
 
         // 🚀 CRITICAL CHECK: Must be 'admin' to use this route
-        if (user.userType !== 'admin') {
-            return res.status(403).json({ message: "Access Denied: Not an Administrator" });
-        }
+        if (user.userType && user.userType.toString() !== 'admin') { 
+    return res.status(403).json({ message: "Access Denied: Not an Administrator" });
+}
 
         // Login successful
         const token = generateToken(user._id);
@@ -149,7 +149,7 @@ router.post("/login", async (req, res) => {
 
     if (userAccount) {
         // 🚀 FIX: If any account is found in the User model AND it's an Admin, block it here.
-        if (userAccount.userType === 'admin') {
+        if (userAccount.userType && userAccount.userType.toString() === 'admin') {
             return res.status(403).json({ success: false, message: "Administrator must use the dedicated admin login portal." });
         }
         // If it's a regular Student logging in, use this account.
