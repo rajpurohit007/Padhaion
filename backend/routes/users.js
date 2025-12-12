@@ -114,88 +114,121 @@ router.post("/register", uploadFields, async (req, res) => {
 });
 
 // --- LOGIN ---
+router.post("/admin/login", async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email });
+
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).json({ message: "Invalid Credentials" });
+        }
+
+        // 🚀 CRITICAL CHECK: Must be 'admin' to use this route
+        if (user.userType !== 'admin') {
+            return res.status(403).json({ message: "Access Denied: Not an Administrator" });
+        }
+
+        // Login successful
+        const token = generateToken(user._id);
+        res.json({ token, user: { id: user._id, name: user.name, email: user.email, userType: user.userType, isFirstLogin: user.isFirstLogin || false } });
+
+    } catch (error) {
+        res.status(500).json({ message: "Server error during admin login" });
+    }
+});
+
+// --- 🚀 GENERIC LOGIN (Student/Institution only) ---
 router.post("/login", async (req, res) => {
-  const { email, password, userType } = req.body; 
+  const { email, password, userType } = req.body; 
 
-  try {
-    let account = null;
+  try {
+    let account = null;
 
-    if (userType === 'institution') {
+    // 1. CRITICAL SECURITY CHECK: Check the User model first, regardless of userType given by frontend
+    const userAccount = await User.findOne({ email });
+
+    if (userAccount) {
+        // 🚀 FIX: If any account is found in the User model AND it's an Admin, block it here.
+        if (userAccount.userType === 'admin') {
+            return res.status(403).json({ success: false, message: "Administrator must use the dedicated admin login portal." });
+        }
+        // If it's a regular Student logging in, use this account.
+        account = userAccount;
+    } 
+    
+    // 2. If no student/admin user was found, check for Institution account
+    if (!account && userType === 'institution') {
         account = await Institution.findOne({ email });
-    } else {
-        account = await User.findOne({ email });
     }
 
-    if (!account) {
-        if (userType === 'institution') {
-             const pending = await InstitutionRequest.findOne({ email });
-             if(pending) return res.status(400).json({ success: false, message: "Your application is still pending approval." });
-        }
-        return res.status(400).json({ success: false, message: "Invalid Credentials" });
-    }
+    // 3. Handle 'Not Found' and 'Pending' Institutions
+    if (!account) {
+        if (userType === 'institution') {
+             const pending = await InstitutionRequest.findOne({ email });
+             if(pending) return res.status(400).json({ success: false, message: "Your application is still pending approval." });
+        }
+        return res.status(400).json({ success: false, message: "Invalid Credentials" });
+    }
 
-   // 3. 🚀 HYBRID PASSWORD CHECK (Fixes the Bug)
-    let isMatch = false;
-    let needsRehash = false; // Flag to upgrade plain text passwords
+   // 4. Password Check and Rehash Logic (Your existing logic)
+    let isMatch = false;
+    let needsRehash = false; 
 
-    // Check A: Is it a valid Bcrypt hash?
-    // bcrypt hashes usually start with $2a$ or $2b$
-    if (account.password && account.password.startsWith("$2")) {
-        isMatch = await bcrypt.compare(password, account.password);
-    } else {
-        // Check B: Is it plain text? (Legacy support)
-        if (account.password === password) {
-            isMatch = true;
-            needsRehash = true; // Mark for security upgrade
-        }
-    }
+    if (account.password && account.password.startsWith("$2")) {
+        isMatch = await bcrypt.compare(password, account.password);
+    } else {
+        if (account.password === password) {
+            isMatch = true;
+            needsRehash = true; 
+        }
+    }
 
-    if (!isMatch) {
-        return res.status(400).json({ success: false, message: "Invalid Credentials" });
-    }
+    if (!isMatch) {
+        return res.status(400).json({ success: false, message: "Invalid Credentials" });
+    }
 
-    // 🚀 SELF-HEALING: If we found a plain text match, secure it now!
-    if (needsRehash) {
-        const salt = await bcrypt.genSalt(10);
-        account.password = await bcrypt.hash(password, salt);
-        await account.save();
-    }
+    // SELF-HEALING: Rehash old plain text passwords
+    if (needsRehash) {
+        const salt = await bcrypt.genSalt(10);
+        account.password = await bcrypt.hash(password, salt);
+        await account.save();
+    }
 
-    // 4. Generate Token & Response
-    const payload = { 
-        user: { 
-            id: account._id, 
-            userType: account.userType, 
-            name: account.name 
-        } 
-    };
+    // 5. Generate Token & Response
+    const payload = { 
+        user: { 
+            id: account._id, 
+            userType: account.userType, 
+            name: account.name 
+        } 
+    };
 
-    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "7d" }, (err, token) => {
-        if (err) throw err;
-        
-        const responseData = { 
-            id: account._id, 
-            name: account.name, 
-            email: account.email, 
-            userType: account.userType, 
-            phone: account.contact ? account.contact.phone : account.phone,
-        };
+    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "7d" }, (err, token) => {
+        if (err) throw err;
+        
+        const responseData = { 
+            id: account._id, 
+            name: account.name, 
+            email: account.email, 
+            userType: account.userType, 
+            phone: account.contact ? account.contact.phone : account.phone,
+        };
 
-        if (userType === 'institution') {
-            responseData.isFirstLogin = account.isFirstLogin;
-        }
+        if (userType === 'institution') {
+            responseData.isFirstLogin = account.isFirstLogin;
+        }
 
-        res.json({ 
-            success: true, 
-            token, 
-            data: responseData
-        });
-    });
+        res.json({ 
+            success: true, 
+            token, 
+            data: responseData
+        });
+    });
 
-  } catch (err) {
-    console.error("Login Error:", err);
-    res.status(500).send("Server Error");
-  }
+  } catch (err) {
+    console.error("Login Error:", err);
+    res.status(500).send("Server Error");
+  }
 });
 // --- FORGOT PASSWORD ---
 router.post("/forgot-password", async (req, res) => {

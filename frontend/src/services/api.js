@@ -145,6 +145,7 @@ api.interceptors.response.use(
   }
 );
 export const adminAPI = {
+  login: (data) => api.post("/users/admin/login", data),
   getDashboardStats: () => api.get("/admin/dashboard/stats"),
   getStudents: (params) => api.get("/admin/students", { params }),
   getInstitutions: (params) => api.get("/admin/institutions", { params }),
