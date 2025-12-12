@@ -114,28 +114,28 @@ router.post("/register", uploadFields, async (req, res) => {
 });
 
 // --- LOGIN ---
-router.post("/admin/login", async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const user = await User.findOne({ email });
+// router.post("/admin/login", async (req, res) => {
+//     const { email, password } = req.body;
+//     try {
+//         const user = await User.findOne({ email });
 
-        if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).json({ message: "Invalid Credentials" });
-        }
+//         if (!user || !(await bcrypt.compare(password, user.password))) {
+//             return res.status(401).json({ message: "Invalid Credentials" });
+//         }
 
-        // 🚀 CRITICAL CHECK: Must be 'admin' to use this route
-        if (user.userType !== 'admin') { 
-    return res.status(403).json({ message: "Access Denied: Dedicated to Administrators only." });
-}
+//         // 🚀 CRITICAL CHECK: Must be 'admin' to use this route
+//         if (user.userType !== 'admin') { 
+//     return res.status(403).json({ message: "Access Denied: Dedicated to Administrators only." });
+// }
 
-        // Login successful
-        const token = generateToken(user._id);
-        res.json({ token, user: { id: user._id, name: user.name, email: user.email, userType: user.userType, isFirstLogin: user.isFirstLogin || false } });
+//         // Login successful
+//         const token = generateToken(user._id);
+//         res.json({ token, user: { id: user._id, name: user.name, email: user.email, userType: user.userType, isFirstLogin: user.isFirstLogin || false } });
 
-    } catch (error) {
-        res.status(500).json({ message: "Server error during admin login" });
-    }
-});
+//     } catch (error) {
+//         res.status(500).json({ message: "Server error during admin login" });
+//     }
+// });
 
 // --- 🚀 GENERIC LOGIN (Student/Institution only) ---
 router.post("/login", async (req, res) => {
